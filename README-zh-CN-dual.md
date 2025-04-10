@@ -34,41 +34,41 @@ realcugan-ncnn-vulkan.exe -i input.jpg -o output.png
 ### 完整用法
 
 ```console
-Usage: realcugan-ncnn-vulkan -i infile -o outfile [options]...
+用法：realcugan-ncnn-vulkan -i 输入文件 -o 输出文件 [选项]...
 
-  -h                   show this help
-  -v                   verbose output
-  -i input-path        input image path (jpg/png/webp) or directory
-  -o output-path       output image path (jpg/png/webp) or directory
-  -n noise-level       denoise level (-1/0/1/2/3, default=-1)
-  -s scale             upscale ratio (1/2/3/4, default=2)
-  -t tile-size         tile size (>=32/0=auto, default=0) can be 0,0,0 for multi-gpu
-  -c syncgap-mode      sync gap mode (0/1/2/3, default=3)
-  -m model-path        realcugan model path (default=models-se)
-  -g gpu-id            gpu device to use (-1=cpu, default=auto) can be 0,1,2 for multi-gpu
-  -j load:proc:save    thread count for load/proc/save (default=1:2:2) can be 1:2,2,2:2 for multi-gpu
-  -x                   enable tta mode
-  -f format            output image format (jpg/png/webp, default=ext/png)
+  -h                   显示此帮助信息
+  -v                   显示详细输出
+  -i input-path        输入图像路径（jpg/png/webp）或目录
+  -o output-path       输出图像路径（jpg/png/webp）或目录
+  -n noise-level       降噪等级（-1/0/1/2/3，默认=-1）
+  -s scale             放大倍数 (1/2/3/4, 默认=2)
+  -t tile-size         分块大小（>=32/0=自动，默认=0），有多个GPU可以设为0,0,0
+  -c syncgap-mode      同步间隔模式 (0/1/2/3, 默认=3)
+  -m model-path        模型路径（默认=models-se）
+  -g gpu-id            使用的GPU编号（-1=CPU，默认=自动），有多个GPU可以设为0,1,2
+  -j load:proc:save    加载/处理/保存的线程数（默认=1:2:2），有多个GPU可以设为1:2,2,2:2
+  -x                   启用tta模式
+  -f format            输出图像格式（jpg/png/webp，默认=ext/png）
 ```
 
-- `input-path` and `output-path` accept either file path or directory path
-- `noise-level` = noise level, large value means strong denoise effect, -1 = no effect
-- `scale` = scale level, 1 = no scaling, 2 = upscale 2x
-- `tile-size` = tile size, use smaller value to reduce GPU memory usage, default selects automatically
-- `syncgap-mode` = sync gap mode, 0 = no sync, 1 = accurate sync, 2 = rough sync, 3 = very rough sync
-- `load:proc:save` = thread count for the three stages (image decoding + realcugan upscaling + image encoding), using larger values may increase GPU usage and consume more GPU memory. You can tune this configuration with "4:4:4" for many small-size images, and "2:2:2" for large-size images. The default setting usually works fine for most situations. If you find that your GPU is hungry, try increasing thread count to achieve faster processing.
-- `format` = the format of the image to be output, png is better supported, however webp generally yields smaller file sizes, both are losslessly encoded
+- `input-path` 和 `output-path` 接受文件路径或目录路径
+- `noise-level` = 降噪等级，数值越大表示去噪效果越强，-1 = 无效果
+- `scale` = 放大倍数, 1 = 不放大, 2 = 放大2倍
+- `tile-size` = 分块大小，使用较小的值以减少GPU内存使用，默认自动选择
+- `syncgap-mode` = 同步间隔模式，0 = 无同步，1 = 精确同步，2 = 粗略同步，3 = 非常粗略的同步
+- `load:proc:save` = 三个阶段的线程数（图像解码 + realcugan放大 + 图像编码），使用较大的值可能会增加GPU使用率并消耗更多GPU内存。对于许多小尺寸图像，可以使用"4:4:4"来调整此配置，对于大尺寸图像，可以使用"2:2:2"。默认设置在大多数情况下都能正常工作。如果发现GPU资源不足，可以尝试增加线程数以加快处理速度。
+- `format` = 要输出的图像格式，png支持较好，但webp通常生成的文件更小，两者都是无损编码
 
-If you encounter a crash or error, try upgrading your GPU driver:
+如果遇到崩溃或错误，请尝试更新您的GPU驱动：
 
 - Intel: https://downloadcenter.intel.com/product/80939/Graphics-Drivers
 - AMD: https://www.amd.com/en/support
 - NVIDIA: https://www.nvidia.com/Download/index.aspx
 
-## Build from Source
+## 从源代码构建
 
-1. Download and setup the Vulkan SDK from https://vulkan.lunarg.com/
-  - For Linux distributions, you can either get the essential build requirements from package manager
+1. 从https://vulkan.lunarg.com/下载并安装Vulkan SDK
+  - 对于Linux发行版，你可以从包管理器中获取基本的构建要求
 ```shell
 dnf install vulkan-headers vulkan-loader-devel
 ```
@@ -79,7 +79,7 @@ apt-get install libvulkan-dev
 pacman -S vulkan-headers vulkan-icd-loader
 ```
 
-2. Clone this project with all submodules
+2. 克隆此项目及其所有子模块
 
 ```shell
 git clone https://github.com/nihui/realcugan-ncnn-vulkan.git
@@ -87,9 +87,8 @@ cd realcugan-ncnn-vulkan
 git submodule update --init --recursive
 ```
 
-3. Build with CMake
-  - You can pass -DUSE_STATIC_MOLTENVK=ON option to avoid linking the vulkan loader library on MacOS
-
+3. 使用 CMake 构建
+  - 你可以在MacOS上传递-DUSE_STATIC_MOLTENVK=ON选项来避免链接vulkan加载器库
 ```shell
 mkdir build
 cd build
@@ -97,13 +96,13 @@ cmake ../src
 cmake --build . -j 4
 ```
 
-## Sample Images
+## 示例图片
 
-### Original Image
+### 原始图像
 
 ![origin](images/0.jpg)
 
-### Upscale 2x with ImageMagick
+### 使用ImageMagick进行2倍放大
 
 ```shell
 convert origin.jpg -resize 200% output.png
@@ -111,7 +110,7 @@ convert origin.jpg -resize 200% output.png
 
 ![browser](images/1.png)
 
-### Upscale 2x with ImageMagick Lanczo4 Filter
+### 使用ImageMagick的Lanczo4滤镜进行2倍放大
 
 ```shell
 convert origin.jpg -filter Lanczos -resize 200% output.png
@@ -119,7 +118,7 @@ convert origin.jpg -filter Lanczos -resize 200% output.png
 
 ![browser](images/4.png)
 
-### Upscale 2x with Real-CUGAN
+### 使用Real-CUGAN进行2倍放大
 
 ```shell
 realcugan-ncnn-vulkan.exe -i origin.jpg -o output.png -s 2 -n 1 -x
@@ -127,11 +126,11 @@ realcugan-ncnn-vulkan.exe -i origin.jpg -o output.png -s 2 -n 1 -x
 
 ![realcugan](images/2.png)
 
-## Original Real-CUGAN Project
+## 原始Real-CUGAN项目
 
 - https://github.com/bilibili/ailab/tree/main/Real-CUGAN
 
-## Other Open-Source Code Used
+## 使用的其他开源代码
 
 - https://github.com/Tencent/ncnn for fast neural network inference on ALL PLATFORMS
 - https://github.com/webmproject/libwebp for encoding and decoding Webp images on ALL PLATFORMS
