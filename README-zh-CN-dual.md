@@ -7,7 +7,7 @@
 
 ncnn 实现的 Real-CUGAN 转换器。在 Intel / AMD / Nvidia / Apple-Silicon 上使用 Vulkan API 运行速度快。
 
-realcugan-ncnn-vulkan 使用 [ncnn 项目](https://github.com/Tencent/ncnn)作为通用神经网络推理框架。
+realcugan-ncnn-vulkan 使用 [ncnn 项目](https://github.com/Tencent/ncnn) 作为通用神经网络推理框架。
 
 ## [下载](https://github.com/nihui/realcugan-ncnn-vulkan/releases)
 
