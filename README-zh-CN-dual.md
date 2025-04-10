@@ -19,7 +19,7 @@ realcugan-ncnn-vulkan 使用 [ncnn 项目](https://github.com/Tencent/ncnn) 作�
 
 ## 关于 Real-CUGAN
 
-Real-CUGAN（用于动漫图像超分辨率的真实级联 U-Nets）
+Real-CUGAN（用于动漫图像超分辨率的真实级联U-Nets）
 
 https://github.com/bilibili/ailab/tree/main/Real-CUGAN
 
@@ -87,7 +87,7 @@ cd realcugan-ncnn-vulkan
 git submodule update --init --recursive
 ```
 
-3. 使用 CMake 构建
+3. 使用CMake构建
   - 你可以在MacOS上传递-DUSE_STATIC_MOLTENVK=ON选项来避免链接vulkan加载器库
 ```shell
 mkdir build
@@ -102,7 +102,7 @@ cmake --build . -j 4
 
 ![origin](images/0.jpg)
 
-### 使用ImageMagick进行2倍放大
+### 使用 ImageMagick 进行2倍放大
 
 ```shell
 convert origin.jpg -resize 200% output.png
@@ -110,7 +110,7 @@ convert origin.jpg -resize 200% output.png
 
 ![browser](images/1.png)
 
-### 使用ImageMagick的Lanczo4滤镜进行2倍放大
+### 使用 ImageMagick 的 Lanczo4 滤镜进行2倍放大
 
 ```shell
 convert origin.jpg -filter Lanczos -resize 200% output.png
@@ -118,7 +118,7 @@ convert origin.jpg -filter Lanczos -resize 200% output.png
 
 ![browser](images/4.png)
 
-### 使用Real-CUGAN进行2倍放大
+### 使用 Real-CUGAN 进行2倍放大
 
 ```shell
 realcugan-ncnn-vulkan.exe -i origin.jpg -o output.png -s 2 -n 1 -x
@@ -126,7 +126,7 @@ realcugan-ncnn-vulkan.exe -i origin.jpg -o output.png -s 2 -n 1 -x
 
 ![realcugan](images/2.png)
 
-## 原始Real-CUGAN项目
+## 原始 Real-CUGAN 项目
 
 - https://github.com/bilibili/ailab/tree/main/Real-CUGAN
 
